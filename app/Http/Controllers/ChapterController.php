@@ -56,7 +56,7 @@ class ChapterController extends Controller
     {
 
         $this->validate($request, [
-            'name' => 'required|max:255|string|unique:chapters',
+            'name' => 'required|max:255|string',
             'content' => 'required',
             'comic_id' => 'required|integer',
         ]);
@@ -108,7 +108,7 @@ class ChapterController extends Controller
     {
         $chapter = Chapter::with('comic')->findOrFail($id);
         $this->validate($request, [
-            'name' => 'required|max:255|string|unique:chapters,name,'.$chapter->id,
+            'name' => 'required|max:255|string',
             'content' => 'required',
             'comic_id' => 'required|string',
         ]);
