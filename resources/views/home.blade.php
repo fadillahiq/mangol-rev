@@ -96,15 +96,7 @@
                 <td>{{ $comic->author }}</td>
                 <td>{{ $comic->type }}</td>
                 <td><a href="{{ asset('komik/'.$comic->thumbnail) }}" target="_blank"><img class="img img-fluid rounded" src="{{ asset('komik/'.$comic->thumbnail) }}" alt="komik thumb"></a></td>
-                <td>
-                    @foreach ($comic->chapter as $chapter)
-                    <strong>
-                        <ul>
-                            <li>{{ $chapter->user->name }}</li>
-                        </ul>
-                    </strong>
-                    @endforeach
-                </td>
+                <td>{{ $comic->user->name }}</td>
                 <td>{{ $comic->chapter->count() }}</td>
               </tr>
               @empty

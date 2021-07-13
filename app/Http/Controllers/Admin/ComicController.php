@@ -28,7 +28,7 @@ class ComicController extends Controller
     public function index()
     {
         Paginator::useBootstrap();
-        $comics = Comic::with(['genre'])->latest()->paginate(10);
+        $comics = Comic::with(['genre', 'user'])->latest()->paginate(10);
 
         return view('admin.comic.index', compact('comics'))->with('i');
     }
@@ -75,7 +75,8 @@ class ComicController extends Controller
             'author' => $request->author,
             'type' => $request->type,
             'thumbnail' => $thumbName,
-            'slug' => $slug
+            'slug' => $slug,
+            'user_id' => Auth::user()->id
         ]);
 
         $post->genre()->attach($request->genre);
@@ -141,7 +142,7 @@ class ComicController extends Controller
                 'author' => $request->author,
                 'type' => $request->type,
                 'thumbnail' => $old_thumb,
-                'slug' => $slug
+                'slug' => $slug,
             ];
             $request->thumbnail->move(public_path().'/komik', $old_thumb);
         } else

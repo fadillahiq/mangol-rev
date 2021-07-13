@@ -31,7 +31,7 @@ class HomeController extends Controller
         $total_komik = Comic::count();
         $total_genre = Genre::count();
         $total_chapter = Chapter::count();
-        $comics = Comic::with(['chapter.user', 'genre'])->latest()->paginate(10);
+        $comics = Comic::with(['chapter.user', 'genre', 'user'])->latest()->paginate(10);
         return view('home', compact('total_komik', 'total_genre', 'total_chapter', 'comics'))->with('i');
     }
 }

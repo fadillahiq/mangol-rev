@@ -46,4 +46,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Chapter::class, 'user_id', 'id');
     }
+
+    public function comic()
+    {
+        return $this->hasMany(Comic::class, 'user_id', 'id');
+    }
 }

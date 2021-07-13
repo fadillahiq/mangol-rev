@@ -34,6 +34,7 @@
                 <th>Status</th>
                 <th>Auhtor</th>
                 <th>Type</th>
+                <th>Posted By</th>
                 <th>Thumbnail</th>
                 <th>Aksi</th>
               </tr>
@@ -54,6 +55,7 @@
                 <td>{{ $comic->status }}</td>
                 <td>{{ $comic->author }}</td>
                 <td>{{ $comic->type }}</td>
+                <td>{{ $comic->user->name }}</td>
                 <td><a href="{{ asset('komik/'.$comic->thumbnail) }}" target="_blank"><img class="img img-fluid rounded" src="{{ asset('komik/'.$comic->thumbnail) }}" alt="komik thumb"></a></td>
                 {{-- <td>
                 @foreach ($comic->genre as $genre)

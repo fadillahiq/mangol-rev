@@ -25,18 +25,18 @@
             <table class="table table-striped">
               <tr>
                 <th>#</th>
-                <th>Nama Chapter</th>
-                <th>Slug</th>
                 <th>Komik</th>
+                <th>Chapter</th>
+                <th>Slug</th>
                 <th>Posted By</th>
                 <th>Aksi</th>
               </tr>
               @forelse ($chapters as $chapter)
               <tr>
                 <td>{{ ++$i }}</td>
+                <td>{{ $chapter->comic->name }}</td>
                 <td>{{ $chapter->name }}</td>
                 <td>{{ $chapter->slug }}</td>
-                <td>{{ $chapter->comic->name }}</td>
                 <td>{{ $chapter->user->name }}</td>
                 <td>
                     @if ($chapter->user_id == Auth::user()->id)
