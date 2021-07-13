@@ -54,15 +54,18 @@ class ChapterController extends Controller
      */
     public function store(Request $request)
     {
+
         $this->validate($request, [
             'name' => 'required|max:255|string|unique:chapters',
             'content' => 'required',
-            'comic_id' => 'required|string',
+            'comic_id' => 'required|integer',
         ]);
+
+        $comic = Comic::where('id', $request->comic_id)->first();
 
         $data = $request->all();
         $data['user_id'] = Auth::user()->id;
-        $data['slug'] = Str::slug($request->comic_id.'-'.$request->name);
+        $data['slug'] = Str::slug($comic->name.'-'.$request->name);
 
         Chapter::create($data);
 

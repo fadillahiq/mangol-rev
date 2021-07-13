@@ -14,7 +14,7 @@ class Chapter extends Model
 
     public function comic()
     {
-        return $this->belongsTo(Comic::class, 'comic_id', 'slug');
+        return $this->belongsTo(Comic::class, 'comic_id', 'id');
     }
 
     public function user()

@@ -18,11 +18,11 @@ class CreateChaptersTable extends Migration
             $table->string('name');
             $table->string('slug');
             $table->string('content');
-            $table->string('comic_id');
+            $table->unsignedBigInteger('comic_id');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
 
-            $table->foreign('comic_id')->references('slug')->on('comics')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('comic_id')->references('id')->on('comics')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
         });
     }

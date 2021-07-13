@@ -14,7 +14,7 @@ class Comic extends Model
 
     public function chapter()
     {
-        return $this->hasMany(Chapter::class, 'comic_id', 'slug');
+        return $this->hasMany(Chapter::class, 'comic_id', 'id');
     }
 
     public function comment()

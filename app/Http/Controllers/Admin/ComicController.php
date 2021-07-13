@@ -66,7 +66,7 @@ class ComicController extends Controller
         $slug = Str::slug($request->name);
         $thumbName = time().'.'.$request->file('thumbnail')->getClientOriginalExtension();
 
-        $request->file('thumbnail')->move(public_path().'/'.('komik/'), $thumbName);
+        $request->file('thumbnail')->move(public_path().'/'.('komik'), $thumbName);
         $post = Comic::create([
             'name' => $request->name,
             'sinopsis' => $request->sinopsis,

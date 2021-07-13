@@ -40,7 +40,7 @@
                         <select class="form-control select2" name="comic_id" id="comic_id" required>
                             <option value="" selected disabled>Pilih Komik</option>
                             @foreach ($comics as $comic)
-                                <option value="{{ $comic->slug }}">{{ $comic->name }}</option>
+                                <option value="{{ $comic->id }}">{{ $comic->name }}</option>
                             @endforeach
                         </select>
                     </div>

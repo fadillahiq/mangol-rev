@@ -39,7 +39,7 @@
                         <label for="comic_id">Komik</label>
                         <select class="form-control select2" name="comic_id" id="comic_id" required>
                             @foreach ($comics as $comic)
-                                <option value="{{ $comic->slug }}" @if($comic->slug == $chapter->comic_id) selected @endif>{{ $comic->name }}</option>
+                                <option value="{{ $comic->id }}" @if($comic->id == $chapter->comic_id) selected @endif>{{ $comic->name }}</option>
                             @endforeach
                         </select>
                     </div>
