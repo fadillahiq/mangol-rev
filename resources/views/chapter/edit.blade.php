@@ -26,6 +26,11 @@
                 </ul>
             </div>
             @endif
+            @if ($message = Session::get('error'))
+            <div class="alert alert-danger">
+                {{ $message }}
+            </div>
+            @endif
             <form action="{{ route('chapter.update', $chapter->id) }}" method="POST">
                 @csrf
                 @method('PUT')

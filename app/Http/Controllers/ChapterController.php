@@ -67,9 +67,16 @@ class ChapterController extends Controller
         $data['user_id'] = Auth::user()->id;
         $data['slug'] = Str::slug($comic->name.'-'.$request->name);
 
-        Chapter::create($data);
+        $unique_slug = Chapter::where('slug', 'LIKE', "{$data['slug']}%")->count();
 
-        return redirect()->route('chapter.index')->with('success', 'Chapter berhasil ditambahkan !');
+        if($unique_slug > 0)
+        {
+            return redirect()->back()->withInput($request->input())->with('error', 'Chapter sudah pernah didaftarkan !');
+        }else {
+            Chapter::create($data);
+
+            return redirect()->route('chapter.index')->with('success', 'Chapter berhasil ditambahkan !');
+        }
     }
 
     /**
@@ -117,9 +124,16 @@ class ChapterController extends Controller
         $data['user_id'] = Auth::user()->id;
         $data['slug'] = Str::slug($chapter->comic->name.'-'.$request->name);
 
-        $chapter->update($data);
+        $unique_slug = Chapter::where('slug', 'LIKE', "{$data['slug']}%")->whereNotIn('id', [$chapter->id])->count();
 
-        return redirect()->route('chapter.index')->with('success', 'Chapter berhasil diperbarui !');
+        if($unique_slug > 0)
+        {
+            return redirect()->back()->withInput($request->input())->with('error', 'Chapter sudah pernah didaftarkan !');
+        }else {
+            $chapter->update($data);
+
+            return redirect()->route('chapter.index')->with('success', 'Chapter berhasil diperbarui !');
+        }
     }
 
     /**
