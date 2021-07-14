@@ -8,6 +8,7 @@ use App\Models\Genre;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 class ComicController extends Controller
 {

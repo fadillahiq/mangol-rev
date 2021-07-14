@@ -6,6 +6,10 @@ use App\Http\Controllers\Admin\GenreController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ChapterController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Mangol\AllKomikController;
+use App\Http\Controllers\Mangol\GenreController as MangolGenreController;
+use App\Http\Controllers\Mangol\HomeController as MangolHomeController;
+use App\Http\Controllers\Mangol\SearchController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -19,9 +23,12 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return '<h1>PASANGIN FRONT NYA WOI</h1>';
-});
+Route::get('/', [MangolHomeController::class, 'index'])->name('mangol.home');
+Route::get('/completed', [MangolHomeController::class, 'completed'])->name('mangol.completed');
+Route::get('/genre', [MangolGenreController::class, 'index'])->name('mangol.genre');
+Route::get('/all-komik', [AllKomikController::class, 'index'])->name('mangol.all.komik');
+Route::get('/search-result', [SearchController::class, 'index'])->name('mangol.search');
+Route::get('/genre/{slug}', [MangolGenreController::class, 'result_genre'])->name('mangol.genre.result');
 
 Auth::routes([
     'register' => false

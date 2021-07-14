@@ -17,7 +17,7 @@ class CreateChaptersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug');
-            $table->string('content');
+            $table->text('content');
             $table->unsignedBigInteger('comic_id');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();

@@ -7,6 +7,7 @@ use App\Models\Genre;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Str;
 
 class GenreController extends Controller
 {/**
@@ -54,6 +55,7 @@ class GenreController extends Controller
         ]);
 
         $data = $request->all();
+        $data['slug'] = Str::slug($request->name);
 
         Genre::create($data);
 
@@ -99,6 +101,7 @@ class GenreController extends Controller
         ]);
 
         $data = $request->all();
+        $data['slug'] = Str::slug($request->name);
 
         $genre->update($data);
         return redirect()->route('genre.index')->with('success', 'Genre berhasil diperbarui !');
