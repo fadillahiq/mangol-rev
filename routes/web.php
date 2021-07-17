@@ -29,6 +29,8 @@ Route::get('/genre', [MangolGenreController::class, 'index'])->name('mangol.genr
 Route::get('/all-komik', [AllKomikController::class, 'index'])->name('mangol.all.komik');
 Route::get('/search-result', [SearchController::class, 'index'])->name('mangol.search');
 Route::get('/genre/{slug}', [MangolGenreController::class, 'result_genre'])->name('mangol.genre.result');
+Route::get('/komik/{slug}', [MangolHomeController::class, 'detail_komik'])->name('mangol.detail.komik');
+Route::get('/chapter/{slug}', [MangolHomeController::class, 'detail_chapter'])->name('mangol.detail.chapter');
 
 Auth::routes([
     'register' => false

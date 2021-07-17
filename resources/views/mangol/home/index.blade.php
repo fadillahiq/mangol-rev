@@ -13,11 +13,11 @@
         <div class="owl-carousel owl-theme mt-4">
           @foreach ($comics->where('status', 'Completed')->take(5) as $complete)
             <div class="item">
-                <a href="#">
+                <a href="{{ route('mangol.detail.komik', $complete->slug) }}">
                     <img src="{{ asset('komik/'.$complete->thumbnail) }}" class="img" alt="thumbnail-comic">
                 </a>
                 <div class="content mt-3">
-                <a href="#"><h6 class="text-center">{{ $complete->name }}</h6></a>
+                <a href="{{ route('mangol.detail.komik', $complete->slug) }}"><h6 class="text-center">{{ $complete->name }}</h6></a>
                 </div>
             </div>
           @endforeach
@@ -31,26 +31,26 @@
         <h5>Komik Terbaru</h5>
     </div>
     {{-- end-title-content --}}
-    
+
     {{-- flex --}}
     <div class="flexbox3">
         @foreach ($comics->where('status', 'On Going') as $comic)
         <div class="flexbox3-item">
             <div class="flexbox3-content">
-                <a href="#">
+                <a href="{{ route('mangol.detail.komik', $comic->slug) }}">
                     <div class="flexbox3-thumb">
                         <img src="{{ asset('komik/'.$comic->thumbnail) }}" class="img-fluid" alt="">
                     </div>
                 </a>
                 <div class="flexbox3-side">
                     <div>
-                        <a href="#">{{ $comic->name }}</a>
+                        <a href="{{ route('mangol.detail.komik', $comic->slug) }}">{{ $comic->name }}</a>
                     </div>
                     <ul class="chapter">
-                        @foreach ($comic->chapter->sortByDesc('name')->take(3) as $chapters)
+                        @foreach ($comic->chapter->sortByDesc('name')->take(3) as $chapter)
                         <li>
-                            <a href="#">{{ $chapters->name }}</a>
-                            <span class="date">{{ \Carbon\Carbon::parse($chapters->created_at)->diffForHumans() }}</span>
+                            <a href="{{ route('mangol.detail.chapter', $chapter->slug) }}">{{ $chapter->name }}</a>
+                            <span class="date">{{ \Carbon\Carbon::parse($chapter->created_at)->diffForHumans() }}</span>
                         </li>
                         @endforeach
                     </ul>
