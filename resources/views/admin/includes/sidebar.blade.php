@@ -17,6 +17,6 @@
         <li class="nav-item {{ (request()->is('home') ? 'active' : '') }}"><a class="nav-link" href="{{ route('home') }}"><i class="fas fa-fire"></i><span>Home</span></a></li>
         <li class="menu-header">Menu</li>
         @endif
-        <li class="nav-item {{ (request()->is('chapter*') ? 'active' : '') }}"><a href="{{ route('chapter.index') }}" class="nav-link"><i class="far fa-bookmark"></i><span>Chapter</span></a></li>
+        <li class="nav-item {{ (request()->is('chapters*') ? 'active' : '') }}"><a href="{{ route('chapters.index') }}" class="nav-link"><i class="far fa-bookmark"></i><span>Chapter</span></a></li>
       </ul>
   </aside>

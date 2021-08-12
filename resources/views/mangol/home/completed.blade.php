@@ -24,10 +24,10 @@
                         <a href="{{ route('mangol.detail.komik', $comic->slug) }}">{{ $comic->name }}</a>
                     </div>
                     <ul class="chapter">
-                        @foreach ($comic->chapter->sortByDesc('name')->take(3) as $chapters)
+                        @foreach ($comic->chapter->sortByDesc('name')->take(3) as $chapter)
                         <li>
-                            <a href="#">{{ $chapters->name }}</a>
-                            <span class="date">{{ \Carbon\Carbon::parse($chapters->created_at)->diffForHumans() }}</span>
+                            <a href="{{ route('mangol.detail.chapter', $chapter->slug) }}">{{ $chapter->name }}</a>
+                            <span class="date">{{ \Carbon\Carbon::parse($chapter->created_at)->diffForHumans() }}</span>
                         </li>
                         @endforeach
                     </ul>

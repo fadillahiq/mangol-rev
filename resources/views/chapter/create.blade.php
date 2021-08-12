@@ -13,7 +13,7 @@
         <div class="card-header">
           <h4>Tambah Chapter</h4>
           <div class="card-header-action">
-            <a href="{{ route('chapter.index') }}" class="btn btn-primary"><i class="fas fa-chevron-left"></i> Kembali</a>
+            <a href="{{ route('chapters.index') }}" class="btn btn-primary"><i class="fas fa-chevron-left"></i> Kembali</a>
           </div>
         </div>
         <div class="card-body">
@@ -31,7 +31,7 @@
                 {{ $message }}
             </div>
             @endif
-            <form action="{{ route('chapter.store') }}" method="POST">
+            <form action="{{ route('chapters.store') }}" method="POST">
                 @csrf
 
                 <div class="row">

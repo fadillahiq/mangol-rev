@@ -28,13 +28,14 @@ Route::get('/completed', [MangolHomeController::class, 'completed'])->name('mang
 Route::get('/genre', [MangolGenreController::class, 'index'])->name('mangol.genre');
 Route::get('/all-komik', [AllKomikController::class, 'index'])->name('mangol.all.komik');
 Route::get('/search-result', [SearchController::class, 'index'])->name('mangol.search');
-Route::get('/genre/{slug}', [MangolGenreController::class, 'result_genre'])->name('mangol.genre.result');
-Route::get('/komik/{slug}', [MangolHomeController::class, 'detail_komik'])->name('mangol.detail.komik');
-Route::get('/chapter/{slug}', [MangolHomeController::class, 'detail_chapter'])->name('mangol.detail.chapter');
 
 Auth::routes([
     'register' => false
 ]);
+
+Route::middleware(['auth'])->group(function () {
+    Route::resource('chapters', ChapterController::class);
+});
 
 Route::prefix('admin')->middleware('role:admin')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -43,16 +44,23 @@ Route::prefix('admin')->middleware('role:admin')->group(function () {
     Route::resource('user', UserController::class);
 });
 
-Route::resource('chapter', ChapterController::class);
-
 Route::middleware(['role:user'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 });
 
-
-
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
 });
+
+Route::get('/chapter/{slug}', [MangolHomeController::class, 'detail_chapter'])->name('mangol.detail.chapter');
+Route::post('/chapter/{slug}/commentPost', [MangolHomeController::class, 'comment_komik'])->name('mangol.comment.komik');
+Route::get('/genre/{slug}', [MangolGenreController::class, 'result_genre'])->name('mangol.genre.result');
+Route::get('/komik/{slug}', [MangolHomeController::class, 'detail_komik'])->name('mangol.detail.komik');
+
+
+
+
+
+
 
 

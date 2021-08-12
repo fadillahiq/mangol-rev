@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="{{ asset('detail-manga-default/css/clist.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('detail-manga-default/css/custom.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('detail-manga-default/css/customlist.css') }}" type="text/css">
+    @toastr_css
 
 <!--
 
@@ -45,7 +46,6 @@ https://templatemo.com/tm-557-grad-school
 
   <!--header-->
   @include('includes.navbar')
-
   <section class="section mb-5 pb-2" style="margin-top: 150px;">
     <div class="container">
         <div class="row justify-content-center">
@@ -58,11 +58,10 @@ https://templatemo.com/tm-557-grad-school
                                         <option value="{{ route('mangol.detail.chapter', $all_chapter->slug) }}" @if($all_chapter->slug == $chapter->slug) selected @endif>{{ $all_chapter->name }}</option>
                                     @endforeach
                             </select>
-
-                            {{-- <div class="form-group ml-auto mt-2 mr-1">
-                                <a class="btn btn-primary btn-sm mr-3" href="{{ $previous }}">« Previous Chapter</a>
-                                <a class="btn btn-primary btn-sm" href="{{ $next }}">Next Chapter »</a>
-                            </div> --}}
+                            <div class="form-group ml-auto mt-2 mr-1">
+                                <a @if ($previous) class="btn btn-primary btn-sm mr-3" @else class="btn btn-primary btn-sm mr-3 d-none" @endif href="{{ $previous }}">« Previous Chapter</a>
+                                <a @if ($next) class ="btn btn-primary btn-sm" @else class="btn btn-primary btn-sm d-none" @endif  href="{{ $next }}">Next Chapter »</a>
+                            </div>
                         </div>
                     </div>
 
@@ -77,11 +76,10 @@ https://templatemo.com/tm-557-grad-school
                                     <option value="{{ route('mangol.detail.chapter', $all_chapter_2->slug) }}" @if($all_chapter_2->slug == $chapter->slug) selected @endif>{{ $all_chapter_2->name }}</option>
                                 @endforeach
                             </select>
-
-                            {{-- <div class="form-group ml-auto mr-1 mt-2">
-                                <a class="btn btn-primary btn-sm mr-3" href="{{ $previous }}">« Previous Chapter</a>
-                                <a class="btn btn-primary btn-sm" href="{{ $next }}">Next Chapter »</a>
-                            </div> --}}
+                            <div class="form-group ml-auto mt-2 mr-1">
+                                <a @if ($previous) class="btn btn-primary btn-sm mr-3" @else class="btn btn-primary btn-sm mr-3 d-none" @endif href="{{ $previous }}">« Previous Chapter</a>
+                                <a @if ($next) class="btn btn-primary btn-sm" @else class="btn btn-primary btn-sm d-none" @endif  href="{{ $next }}">Next Chapter »</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -91,7 +89,7 @@ https://templatemo.com/tm-557-grad-school
     </div>
   </section>
 
-  {{-- <section class="anime-details spad pb-3">
+  <section class="anime-details spad pb-3">
     <div class="container">
         <div class="anime__details__content">
             <div class="row">
@@ -101,7 +99,7 @@ https://templatemo.com/tm-557-grad-school
                         <div class="section-title">
                             <h5>Comments</h5>
                         </div>
-                        <form action="{{ route('mangol.comments.chapter', $chapter->id) }}" method="POST">
+                        <form action="{{ route('mangol.comment.komik', $chapter->id) }}" method="POST">
                             @csrf
                             <div class="row mb-2">
                                 <div class="col">
@@ -124,22 +122,22 @@ https://templatemo.com/tm-557-grad-school
                         <div class="section-title">
                             <h5>Your Comments</h5>
                         </div>
-                       @foreach ($chapter->comment()->orderBy('created_at', 'desc')->get() as $comment)
-                       <div class="anime__review__item">
-                            <div class="anime__review__item__pic">
-                                <img src="../../assets/images/review-6.jpg" alt="">
+                        @foreach ($chapter->comment()->orderBy('created_at', 'desc')->get() as $comment)
+                        <div class="anime__review__item">
+                                <div class="anime__review__item__pic">
+                                    <img src="{{ asset('manga/assets/images/review-6.jpg') }}" alt="">
+                                </div>
+                                <div class="anime__review__item__text">
+                                    <h6>{{ $comment->name }} - <span>{{ \Carbon\Carbon::parse($comment->created_at)->diffForHumans() }}</span></h6>
+                                    <p>{{ $comment->body }}</p>
+                                </div>
                             </div>
-                            <div class="anime__review__item__text">
-                                <h6>{{ $comment->name }} - <span>{{ \Carbon\Carbon::parse($comment->created_at)->diffForHumans() }}</span></h6>
-                                <p>{{ $comment->body }}</p>
-                            </div>
-                        </div>
-                       @endforeach
+                        @endforeach
                     </div>
                 </div>
             </div>
         </div>
-</section> --}}
+</section>
 
   @include('includes.footer')
 
@@ -156,5 +154,8 @@ https://templatemo.com/tm-557-grad-school
   <script src="{{ asset('assets/js/video.js') }}"></script>
   <script src="{{ asset('assets/js/slick-slider.js') }}"></script>
   <script src="{{ asset('assets/js/custom.js') }}"></script>
+    @jquery
+    @toastr_js
+    @toastr_render
 </body>
 </html>

@@ -12,7 +12,7 @@
         <div class="card-header">
           <h4>List Chapter</h4>
           <div class="card-header-action">
-            <a href="{{ route('chapter.create') }}" class="btn btn-primary">Tambah Chapter <i class="fas fa-chevron-right"></i></a>
+            <a href="{{ route('chapters.create') }}" class="btn btn-primary">Tambah Chapter <i class="fas fa-chevron-right"></i></a>
           </div>
         </div>
         <div class="card-body p-0">
@@ -40,11 +40,11 @@
                 <td>{{ $chapter->user->name }}</td>
                 <td>
                     @if ($chapter->user_id == Auth::user()->id)
-                    <form class="d-flex" action="{{ route('chapter.destroy', $chapter->id) }}" method="POST">
+                    <form class="d-flex" action="{{ route('chapters.destroy', $chapter->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
 
-                        <a href="{{ route('chapter.edit', $chapter->id) }}" class="btn btn-warning mr-2">Ubah</a>
+                        <a href="{{ route('chapters.edit', $chapter->id) }}" class="btn btn-warning mr-2">Ubah</a>
                         <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah anda yakin ?')">Hapus</button>
                     </form>
                     @else

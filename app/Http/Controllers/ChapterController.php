@@ -75,7 +75,7 @@ class ChapterController extends Controller
         }else {
             Chapter::create($data);
 
-            return redirect()->route('chapter.index')->with('success', 'Chapter berhasil ditambahkan !');
+            return redirect()->route('chapters.index')->with('success', 'Chapter berhasil ditambahkan !');
         }
     }
 
@@ -132,7 +132,7 @@ class ChapterController extends Controller
         }else {
             $chapter->update($data);
 
-            return redirect()->route('chapter.index')->with('success', 'Chapter berhasil diperbarui !');
+            return redirect()->route('chapters.index')->with('success', 'Chapter berhasil diperbarui !');
         }
     }
 
@@ -147,6 +147,6 @@ class ChapterController extends Controller
         $chapter = Chapter::findOrFail($id);
         $chapter->delete();
 
-        return redirect()->route('chapter.index')->with('success', 'Chapter berhasil dihapus !');
+        return redirect()->route('chapters.index')->with('success', 'Chapter berhasil dihapus !');
     }
 }

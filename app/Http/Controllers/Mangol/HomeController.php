@@ -7,7 +7,9 @@ use App\Models\Chapter;
 use App\Models\Comic;
 use App\Models\Comment;
 use App\Models\Genre;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class HomeController extends Controller
 {
@@ -36,36 +38,34 @@ class HomeController extends Controller
 
     public function detail_chapter($slug)
     {
-        $chapter = Chapter::with(['comic', 'user'])->where('slug', $slug)->first();
-
+        $chapter = Chapter::with(['comic', 'user','comment'])->where('slug', $slug)->first();
         $chapters = Chapter::with(['comic'])->where('comic_id', $chapter->comic_id)->orderBy('name', 'desc')->get();
 
-         // get previous
-        $previous = Chapter::where('slug', '<', $chapter->slug)->max('slug');
-
+        // get previous
+        $previous = Chapter::where('id', '<', $chapter->id)->where('comic_id', $chapter->comic_id)->max('slug');
          // get next
-        $next = Chapter::where('slug', '>', $chapter->slug)->min('slug');
+        $next = Chapter::where('id', '>', $chapter->id)->where('comic_id', $chapter->comic_id)->min('slug');
 
         return view('mangol.detail.chapter', compact('chapter', 'chapters', 'next', 'previous'));
     }
 
 
     // Comment
-    // public function comment_komik(Request $request, $slug)
-    // {
-    //     $comic = Comic::findOrFail($slug);
+    public function comment_komik(Request $request, $slug)
+    {
+        $chapter = Chapter::findOrFail($slug);
 
-    //     $this->validate($request, [
-    //         'name' => 'required|min:4|max:64',
-    //         'email' => 'required|email|max:50',
-    //         'body' => 'required|max:300'
-    //     ]);
+        $this->validate($request, [
+            'name' => 'required|min:4|max:64',
+            'body' => 'required|max:300'
+        ]);
 
-    //     $data = $request->all();
-    //     $data['comic_id'] = $comic->id;
+        $data = $request->all();
+        $data['chapter_id'] = $chapter->id;
 
-    //     Comment::create($data);
+        Comment::create($data);
 
-    //     return redirect()->back();
-    // }
+        toastr()->success('Komentar berhasil dikirim !');
+        return redirect()->back();
+    }
 }

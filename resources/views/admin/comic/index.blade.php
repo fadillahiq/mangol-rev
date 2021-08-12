@@ -13,7 +13,7 @@
         <div class="card-header">
           <h4>List Komik</h4>
           <div class="card-header-action">
-            <a href="{{ route('komik.create') }}" class="btn btn-primary">Add Post <i class="fas fa-chevron-right"></i></a>
+            <a href="{{ route('komik.create') }}" class="btn btn-primary">Add Komik <i class="fas fa-chevron-right"></i></a>
           </div>
         </div>
         <div class="card-body p-0">
